@@ -6,6 +6,54 @@ Turn a **Claude Code** chat into a **developer learning artifact**: one structur
 
 ---
 
+## Requirements
+
+- [Claude Code](https://claude.com/claude-code) CLI
+
+## Install
+
+### Get the plugin
+
+```bash
+git clone https://github.com/yash0208/claude-docit-plugin.git
+cd claude-docit-plugin
+```
+
+### Option A — Point Claude at the clone (no copy)
+
+```bash
+claude --plugin-dir "$(pwd)"
+```
+
+Use the same `--plugin-dir` with the absolute path to your clone whenever you start Claude Code.
+
+### Option B — Copy to `~/.local/share` (recommended)
+
+```bash
+chmod +x install.sh
+./install.sh
+```
+
+Then start Claude with the path the script prints, e.g.:
+
+```bash
+claude --plugin-dir "$HOME/.local/share/claude-docit-plugin"
+```
+
+On macOS/Linux, if `XDG_DATA_HOME` is set, the install target is `$XDG_DATA_HOME/claude-docit-plugin`.
+
+## Usage
+
+1. Start Claude Code with `--plugin-dir` pointing at this plugin (see above).
+2. In the chat, run: **`/docit:docit`**
+
+The agent writes files under the **project root** you opened in Claude Code:
+
+- `.cursor/docusor/summaries/<Document Title>.md` — full 12-section summary (with YAML frontmatter: `date`, `source: claude-code-docit`, `generatedAt`)
+- `.cursor/rules/<slug>.mdc` — one file per rule from section 11 (if any)
+
+---
+
 ## What it does
 
 After you have worked with Claude Code in a project, run **`/docit:docit`**. The assistant follows a fixed **12-section template** and writes:
@@ -77,52 +125,6 @@ flowchart TB
 | **Codify conventions** | Section 11 becomes **`.cursor/rules/*.mdc`** so Cursor (and future sessions) follow the same patterns. |
 
 ---
-
-## Requirements
-
-- [Claude Code](https://claude.com/claude-code) CLI
-
-## Install
-
-### Get the plugin
-
-```bash
-git clone https://github.com/yash0208/claude-docit-plugin.git
-cd claude-docit-plugin
-```
-
-### Option A — Point Claude at the clone (no copy)
-
-```bash
-claude --plugin-dir "$(pwd)"
-```
-
-Use the same `--plugin-dir` with the absolute path to your clone whenever you start Claude Code.
-
-### Option B — Copy to `~/.local/share` (recommended)
-
-```bash
-chmod +x install.sh
-./install.sh
-```
-
-Then start Claude with the path the script prints, e.g.:
-
-```bash
-claude --plugin-dir "$HOME/.local/share/claude-docit-plugin"
-```
-
-On macOS/Linux, if `XDG_DATA_HOME` is set, the install target is `$XDG_DATA_HOME/claude-docit-plugin`.
-
-## Usage
-
-1. Start Claude Code with `--plugin-dir` pointing at this plugin (see above).
-2. In the chat, run: **`/docit:docit`**
-
-The agent writes files under the **project root** you opened in Claude Code:
-
-- `.cursor/docusor/summaries/<Document Title>.md` — full 12-section summary (with YAML frontmatter: `date`, `source: claude-code-docit`, `generatedAt`)
-- `.cursor/rules/<slug>.mdc` — one file per rule from section 11 (if any)
 
 ## Optional: `-docit` in your project
 
