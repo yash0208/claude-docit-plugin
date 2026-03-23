@@ -1,0 +1,14 @@
+{
+  "name": "docit",
+  "description": "Document Claude Code sessions as developer learning artifacts: 12-section markdown + optional .cursor/rules. Same session, no extra API.",
+  "version": "1.0.0",
+  "author": {
+    "name": "Docusor / Docit contributors"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docucursor/docucursor"
+  },
+  "homepage": "https://github.com/docucursor/docucursor"
+}
