@@ -2,6 +2,8 @@
 
 Use **this Claude Code conversation** as the source of truth. Summarize from the start of the session as far as your context allows. Produce a **developer learning document**: a knowledge artifact and debugging guide. Be technically clear and concise.
 
+**Write the summary to** `.claude/documents/<Document Title>.md` (create directories as needed). **Merge section 11 into** project-root **`agents.md`** per the Docit command Steps — do not use `.cursor/` or `.mdc` files.
+
 Output **exactly** these sections in this order (use the exact `##` headers shown). Do not add commentary outside the sections.
 
 ---
@@ -30,9 +32,9 @@ What was implemented: features added, fixes applied, configuration changes, arch
 
 ---
 
-## 4. How Cursor Solved It (Step-by-Step)
+## 4. How Claude Handled It (Step-by-Step)
 
-Chronological technical breakdown of what happened in this session: major steps (reading files, modifying modules, writing new code, refactoring, adjusting config, adding validation). For each step include the reasoning behind the change. (In a Claude-only session, describe what **Claude** did step by step.) Help developers retrace the implementation.
+Chronological technical breakdown of what happened in this session: major steps (reading files, modifying modules, writing new code, refactoring, adjusting config, adding validation). For each step include the reasoning behind the change. Describe what **Claude** did step by step. Help developers retrace the implementation.
 
 ---
 
@@ -60,9 +62,9 @@ Potential or actual issues (incorrect parsing, prompt issues, truncation, wrong 
 
 ---
 
-## 9. Mistakes Cursor Made
+## 9. Mistakes Claude Made
 
-Explicit list. Each bullet: Mistake · Cause · Correction. If none: `None identified.` (If only Claude was involved, list mistakes **Claude** made in the same format.)
+Explicit list. Each bullet: Mistake · Cause · Correction. If none: `None identified.`
 
 ---
 
@@ -72,9 +74,9 @@ Whether the implementation solves the original problem, limitations, possible im
 
 ---
 
-## 11. Suggested Cursor Rules
+## 11. Suggested Project Guidance
 
-Rules the **user asked to follow** or that emerged from the session: structure, architecture, patterns, conventions. Write 3–6 rules. Each rule = one clear, standalone instruction. These will be saved as separate `.mdc` files under `.cursor/rules/` with short hyphenated slugs from the first ~6 words of each rule (lowercase, letters and hyphens only, max ~40 chars). Keep each rule one sentence when possible.
+Rules the **user asked to follow** or that emerged from the session: structure, architecture, patterns, conventions for **future Claude Code work** on this repo. Write 3–6 rules. Each rule = one clear, standalone instruction. These same bullets are **appended to `agents.md`** at the project root (see Docit command Steps). List them here in the summary as plain numbered or bulleted lines.
 
 ---
 
@@ -86,7 +88,7 @@ Only if the session involved system flow or architecture: one Mermaid diagram (`
 
 ## Frontmatter for the saved summary file
 
-When writing the main `.md` file, start with YAML frontmatter:
+When writing the main `.md` file under `.claude/documents/`, start with YAML frontmatter:
 
 ```yaml
 ---

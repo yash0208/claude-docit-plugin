@@ -1,6 +1,6 @@
 {
   "name": "docit",
-  "description": "Document Claude Code sessions as developer learning artifacts: 12-section markdown + optional .cursor/rules. Same session, no extra API.",
+  "description": "Document Claude Code sessions: 12-section markdown in .claude/documents/ and merge guidance into agents.md. Same session, no extra API.",
   "version": "1.0.0",
   "author": {
     "name": "Docusor / Docit contributors"
