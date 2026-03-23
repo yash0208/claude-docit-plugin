@@ -1,0 +1,21 @@
+{
+  "name": "yash-docit",
+  "metadata": {
+    "description": "Docit — session summaries in .claude/documents/, agents.md, and /docit:up to debug from past docs",
+    "version": "1.0.0"
+  },
+  "owner": {
+    "name": "Yash Mehta"
+  },
+  "plugins": [
+    {
+      "name": "docit",
+      "description": "Document Claude Code sessions (/docit:doc); read past docs to debug (/docit:up); list summaries (/docit:list).",
+      "version": "1.0.0",
+      "source": "./",
+      "license": "MIT",
+      "homepage": "https://github.com/yash0208/claude-docit-plugin",
+      "repository": "https://github.com/yash0208/claude-docit-plugin"
+    }
+  ]
+}

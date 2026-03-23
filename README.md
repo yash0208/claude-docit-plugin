@@ -138,6 +138,7 @@ Merge **`CLAUDE.md.snippet`** into your project’s **`CLAUDE.md`** for shorthan
 | Path | Role |
 |------|------|
 | `.claude-plugin/plugin.json` | Plugin manifest |
+| `.claude-plugin/marketplace.json` | Catalog for Claude Code **`/plugin marketplace add`** |
 | `commands/doc.md` | **`/docit:doc`** — full write spec |
 | `commands/up.md` | **`/docit:up`** — read summaries + debug |
 | `commands/list.md` | **`/docit:list`** — index |
@@ -150,6 +151,20 @@ Merge **`CLAUDE.md.snippet`** into your project’s **`CLAUDE.md`** for shorthan
 /reload-plugins
 ```
 
+## Install via Claude Code marketplace (this repo)
+
+This repo includes **`.claude-plugin/marketplace.json`**, so others can add it as a **custom marketplace** (not the same as Anthropic’s built-in catalog—you host the GitHub repo; users point Claude Code at it).
+
+1. **Push** this repo to GitHub (e.g. [yash0208/claude-docit-plugin](https://github.com/yash0208/claude-docit-plugin)).
+2. In **Claude Code**, register the marketplace (exact command may vary by version; see [Create and distribute a plugin marketplace](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces)):
+   - Typically: **`/plugin marketplace add yash0208/claude-docit-plugin`** (or your `owner/repo`).
+3. **Install the plugin** from that marketplace:
+   - **`/plugin install docit@yash-docit`**  
+   - Here **`yash-docit`** is the marketplace **`name`** in `marketplace.json`; **`docit`** is the plugin entry’s **`name`** (must match `.claude-plugin/plugin.json`).
+4. Refresh the catalog later with **`/plugin marketplace update`** when you change the repo.
+
+**Publish to Anthropic’s official marketplace:** that is a **separate** process (submission / review by Anthropic). The file above is for **your own** GitHub-hosted marketplace as described in the docs.
+
 ## Distribute your own fork
 
-Clone this repo (or your fork) and follow **Install** above. For a [plugin marketplace](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces), add `.claude-plugin/marketplace.json` listing this plugin’s source.
+Clone this repo (or your fork) and follow **Install** above, or use the marketplace steps above with your fork’s `owner/repo`.
