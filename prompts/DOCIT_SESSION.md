@@ -1,4 +1,4 @@
-# Docit session documentation (Claude Code)
+# Docit session documentation (Claude Code) — `/docit:doc`
 
 Use **this Claude Code conversation** as the source of truth. Summarize from the start of the session as far as your context allows. Produce a **developer learning document**: a knowledge artifact and debugging guide. Be technically clear and concise.
 
@@ -98,4 +98,4 @@ generatedAt: <ISO-8601>
 ---
 ```
 
-Then the title line and body sections as usual. Add a line under the main title: **Session date:** … · **Source:** Claude Code Docit plugin (`/docit:docit`).
+Then the title line and body sections as usual. Add a line under the main title: **Session date:** … · **Source:** Claude Code Docit (`/docit:doc`).

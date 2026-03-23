@@ -1,8 +1,8 @@
 ---
-description: Document this Claude Code session as a developer learning artifact. Writes summary under .claude/documents/ and merges guidance into agents.md. Same session, no extra API.
+description: Save this session as a Docit summary (.claude/documents/) and append guidance to agents.md. Run /docit:doc after meaningful work.
 ---
 
-# Docit — session documentation
+# Docit — `/docit:doc` (document session)
 
 You are in **Claude Code** in the same session as the user. **No separate API call** — use this conversation as the source.
 
@@ -100,4 +100,4 @@ generatedAt: <ISO-8601>
 ---
 ```
 
-Then `# Docit: Developer learning document` (or equivalent title), then **Session date:** … · **Source:** Claude Code Docit (`/docit:docit`), then all `##` sections in order.
+Then `# Docit: Developer learning document` (or equivalent title), then **Session date:** … · **Source:** Claude Code Docit (`/docit:doc`), then all `##` sections in order.

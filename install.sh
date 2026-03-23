@@ -16,7 +16,7 @@ DEST="${DATA_HOME}/${PLUGIN_NAME}"
 if [[ "$(cd "$SCRIPT_DIR" && pwd)" == "$(cd "$DEST" 2>/dev/null && pwd)" ]]; then
   echo "Already at install location: $DEST"
   echo "Run: claude --plugin-dir \"$DEST\""
-  echo "Slash command: /docit:docit"
+  echo "Commands: /docit:doc  /docit:up  /docit:list"
   exit 0
 fi
 
@@ -40,5 +40,7 @@ echo ""
 echo "After editing plugin files, reload in Claude:"
 echo "  /reload-plugins"
 echo ""
-echo "Slash command:"
-echo "  /docit:docit"
+echo "Commands:"
+echo "  /docit:doc    — save session to .claude/documents/ + agents.md"
+echo "  /docit:up     — read past docs, match issue, debug"
+echo "  /docit:list   — index summaries"

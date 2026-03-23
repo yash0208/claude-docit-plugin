@@ -1,6 +1,6 @@
 {
   "name": "docit",
-  "description": "Document Claude Code sessions: 12-section markdown in .claude/documents/ and merge guidance into agents.md. Same session, no extra API.",
+  "description": "Docit: /docit:doc saves sessions to .claude/documents/ + agents.md; /docit:up reads past docs to debug; /docit:list indexes summaries.",
   "version": "1.0.0",
   "author": {
     "name": "Docusor / Docit contributors"

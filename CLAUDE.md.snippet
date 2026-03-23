@@ -1,5 +1,11 @@
-<!-- Merge into your project CLAUDE.md if you want the -docit trigger -->
+<!-- Merge into your project CLAUDE.md if you want text triggers without typing slash commands -->
 
-## User shorthand: -docit
+## User shorthand (Docit plugin)
 
-When the user message is exactly **`-docit`** (or starts with `-docit` as the only instruction), treat it as a request to run the same workflow as the Docit plugin command **`/docit:docit`**: document this Claude Code session using the Output specification in the Docit command (12 sections, Document Title, write `.claude/documents/<Title>.md`, merge section 11 into project-root **`agents.md`**). No separate API — use this session as the source.
+| Shorthand | Same as |
+|-----------|---------|
+| **`-doc`** | **`/docit:doc`** — write this session to `.claude/documents/` and append section 11 to **`agents.md`**. |
+| **`-docup`** or **`-docitup`** | **`/docit:up`** — read existing Docit summaries, match the user’s bug or question, then investigate using those paths and structure. |
+| **`-doclist`** | **`/docit:list`** — list indexed summaries under `.claude/documents/`. |
+
+Treat these as the only instruction when the message is exactly the shorthand (or starts with it with no other task). No separate API — use this session and files on disk as the source.
