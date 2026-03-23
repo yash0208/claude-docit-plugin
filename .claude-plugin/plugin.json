@@ -6,9 +6,6 @@
     "name": "Docusor / Docit contributors"
   },
   "license": "MIT",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/yash0208/claude-docit-plugin"
-  },
+  "repository": "https://github.com/yash0208/claude-docit-plugin",
   "homepage": "https://github.com/yash0208/claude-docit-plugin"
 }
