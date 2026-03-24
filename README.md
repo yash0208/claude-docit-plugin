@@ -27,17 +27,7 @@ Everything runs **in the same session**—no separate API. Old **`/docit:docit`*
 
 ### From Claude Code marketplace (recommended)
 
-The plugin is **hosted on GitHub:** [yash0208/claude-docit-plugin](https://github.com/yash0208/claude-docit-plugin). In Claude Code:
-
-1. Register this repo as a marketplace:
-
-```
-/plugin marketplace add yash0208/claude-docit-plugin
-```
-
-For a fork, use `owner/repo` instead.
-
-2. Install the plugin from that marketplace:
+Docit is listed in the **yash-docit** marketplace ([source repo](https://github.com/yash0208/claude-docit-plugin)). **Install:**
 
 ```
 /plugin install docit@yash-docit
@@ -48,13 +38,15 @@ For a fork, use `owner/repo` instead.
 | **`docit`** | Plugin **`name`** in `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` |
 | **`yash-docit`** | Marketplace **`name`** in `.claude-plugin/marketplace.json` |
 
-3. When this repo updates on GitHub, refresh the catalog:
+**First time on this machine?** You only **register** the marketplace **once per device** (per Claude Code environment). If install fails because the catalog isn’t there yet, add it, then install again:
 
 ```
-/plugin marketplace update
+/plugin marketplace add yash0208/claude-docit-plugin
 ```
 
-Slash-command wording can vary slightly by Claude Code version; use **`/plugin`** in the app if needed. More detail: [plugin marketplaces](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces).
+Use `owner/repo` if you use a fork. After the repo updates, refresh the catalog: **`/plugin marketplace update`**.
+
+Slash-command wording can vary by Claude Code version; use **`/plugin`** in the app if needed. Details: [plugin marketplaces](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces).
 
 ### From source (`git` + `--plugin-dir`)
 
