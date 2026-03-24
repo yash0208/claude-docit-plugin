@@ -16,7 +16,7 @@ Full reference: `prompts/DOCIT_UP.md` (same instructions as this file).
 
 2. **Read what matters**  
    - Read frontmatter (`date`, `generatedAt`) and skim sections **1–3**, **5–6**, and **8** of each file (overview, architecture, paths, known failure points).  
-   - Optionally skim project-root **`agents.md`** for Docit-captured guidance if it exists.
+   - Optionally skim project-root **`agents.md`** (the **`## Docit`** block) for user-stated constraints if it exists.
 
 3. **Match to the user’s issue**  
    - From the user’s latest message (and thread context), infer: feature area, error text, file names they mentioned, or stack traces.  

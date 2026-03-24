@@ -1,6 +1,6 @@
 {
   "name": "docit",
-  "description": "Docit: /docit:doc saves sessions to .claude/documents/ + agents.md; /docit:up reads past docs to debug; /docit:list indexes summaries.",
+  "description": "Docit: /docit:doc → .claude/documents/ + strict user rules under ## Docit in agents.md; /docit:up; /docit:list.",
   "version": "1.0.0",
   "author": {
     "name": "Docusor / Docit contributors"

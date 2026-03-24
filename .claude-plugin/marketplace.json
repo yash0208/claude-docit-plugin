@@ -1,7 +1,7 @@
 {
   "name": "yash-docit",
   "metadata": {
-    "description": "Docit — session summaries in .claude/documents/, agents.md, and /docit:up to debug from past docs",
+    "description": "Docit — .claude/documents/ summaries; explicit user rules only under ## Docit in agents.md; /docit:up to debug from past docs",
     "version": "1.0.0"
   },
   "owner": {
@@ -10,7 +10,7 @@
   "plugins": [
     {
       "name": "docit",
-      "description": "Document Claude Code sessions (/docit:doc); read past docs to debug (/docit:up); list summaries (/docit:list).",
+      "description": "Document sessions (/docit:doc); strict user rules → agents.md ## Docit; /docit:up; /docit:list.",
       "version": "1.0.0",
       "source": "./",
       "license": "MIT",

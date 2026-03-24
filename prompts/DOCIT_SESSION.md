@@ -2,7 +2,7 @@
 
 Use **this Claude Code conversation** as the source of truth. Summarize from the start of the session as far as your context allows. Produce a **developer learning document**: a knowledge artifact and debugging guide. Be technically clear and concise.
 
-**Write the summary to** `.claude/documents/<Document Title>.md` (create directories as needed). **Merge section 11 into** project-root **`agents.md`** per the Docit command Steps — do not use `.cursor/` or `.mdc` files.
+**Write the summary to** `.claude/documents/<Document Title>.md` (create directories as needed). **Section 11 → `agents.md`:** only **explicit user-stated** constraints, under a single fixed **`## Docit`** section, appending bullets — see `commands/doc.md` Steps. Do not use `.cursor/` or `.mdc` files.
 
 Output **exactly** these sections in this order (use the exact `##` headers shown). Do not add commentary outside the sections.
 
@@ -74,9 +74,12 @@ Whether the implementation solves the original problem, limitations, possible im
 
 ---
 
-## 11. Suggested Project Guidance
+## 11. Strict user instructions (agents.md sync)
 
-Rules the **user asked to follow** or that emerged from the session: structure, architecture, patterns, conventions for **future Claude Code work** on this repo. Write 3–6 rules. Each rule = one clear, standalone instruction. These same bullets are **appended to `agents.md`** at the project root (see Docit command Steps). List them here in the summary as plain numbered or bulleted lines.
+**Only** directives the **user explicitly stated** in this session (e.g. don’t include file X in PRs, don’t change file Y without asking). **No** invented “best practices” or inferred conventions.
+
+If none: **`None — no explicit user instructions to sync to agents.md.`**  
+If some: bullet list; these are appended under **`## Docit`** in `agents.md` per Docit Steps.
 
 ---
 

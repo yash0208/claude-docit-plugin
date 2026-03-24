@@ -1,6 +1,6 @@
 # Claude Docit plugin
 
-Turn **Claude Code** sessions into **`.claude/documents/`** summaries and **`agents.md`** guidance—and **reuse those docs later** when something breaks or you need context.
+Turn **Claude Code** sessions into **`.claude/documents/`** summaries—and **only explicit user rules** into a single **`## Docit`** block in **`agents.md`**. Reuse those docs later with **`/docit:up`** when something breaks.
 
 **Repository:** [github.com/yash0208/claude-docit-plugin](https://github.com/yash0208/claude-docit-plugin)
 
@@ -10,7 +10,7 @@ Turn **Claude Code** sessions into **`.claude/documents/`** summaries and **`age
 
 | Command | When to use |
 |---------|-------------|
-| **`/docit:doc`** | After meaningful work—**save** this session as a 12-section summary + append guidance to `agents.md`. |
+| **`/docit:doc`** | After meaningful work—**save** a 12-section summary; **`agents.md`** only gets **strict instructions the user actually said** (one **`## Docit`** section, bullets appended). |
 | **`/docit:up`** | **Later:** you have a bug or question—read past summaries, **find the relevant feature**, then debug using documented paths and architecture. |
 | **`/docit:list`** | Quick **index** of all summaries (date + title) before picking one mentally or running **`up`**. |
 
@@ -20,18 +20,52 @@ Everything runs **in the same session**—no separate API. Old **`/docit:docit`*
 
 ## Requirements
 
-- [Claude Code](https://claude.com/claude-code) CLI
+- [Claude Code](https://claude.com/claude-code) CLI  
+- **Anthropic access for Claude Code** — Docit only runs inside Claude Code (plan and/or API billing per [Claude Code docs](https://docs.anthropic.com/en/docs/claude-code)). No separate Docit fee.
 
 ## Install
 
-### Get the plugin
+### From Claude Code marketplace (recommended)
+
+The plugin is **hosted on GitHub:** [yash0208/claude-docit-plugin](https://github.com/yash0208/claude-docit-plugin). In Claude Code:
+
+1. Register this repo as a marketplace:
+
+```
+/plugin marketplace add yash0208/claude-docit-plugin
+```
+
+For a fork, use `owner/repo` instead.
+
+2. Install the plugin from that marketplace:
+
+```
+/plugin install docit@yash-docit
+```
+
+| Part | Meaning |
+|------|--------|
+| **`docit`** | Plugin **`name`** in `.claude-plugin/marketplace.json` and `.claude-plugin/plugin.json` |
+| **`yash-docit`** | Marketplace **`name`** in `.claude-plugin/marketplace.json` |
+
+3. When this repo updates on GitHub, refresh the catalog:
+
+```
+/plugin marketplace update
+```
+
+Slash-command wording can vary slightly by Claude Code version; use **`/plugin`** in the app if needed. More detail: [plugin marketplaces](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces).
+
+### From source (`git` + `--plugin-dir`)
+
+#### Clone the repo
 
 ```bash
 git clone https://github.com/yash0208/claude-docit-plugin.git
 cd claude-docit-plugin
 ```
 
-### Option A — Point Claude at the clone (no copy)
+#### Option A — Point Claude at the clone (no copy)
 
 ```bash
 claude --plugin-dir "$(pwd)"
@@ -39,7 +73,7 @@ claude --plugin-dir "$(pwd)"
 
 Use the same `--plugin-dir` with the absolute path to your clone whenever you start Claude Code.
 
-### Option B — Copy to `~/.local/share` (recommended)
+#### Option B — Copy to `~/.local/share`
 
 ```bash
 chmod +x install.sh
@@ -56,13 +90,13 @@ On macOS/Linux, if `XDG_DATA_HOME` is set, the install target is `$XDG_DATA_HOME
 
 ## Usage
 
-1. Start Claude Code with `--plugin-dir` pointing at this plugin (see above).
+1. Start Claude Code with the plugin available (marketplace install above, or `--plugin-dir` from **From source**).
 2. Run **`/docit:doc`**, **`/docit:up`**, or **`/docit:list`** as needed (see table above).
 
 **Writes / updates (for `doc` only):**
 
 - **`.claude/documents/<Document Title>.md`** — full summary (frontmatter: `date`, `source: claude-code-docit`, `generatedAt`)
-- **`agents.md`** — section 11 appended as a dated `## Docit — …` block
+- **`agents.md`** — **only if** the user gave explicit constraints this session: append dated bullets under a **single** heading **`## Docit`** (never a new dated heading per run). If there were no such instructions, Docit leaves `agents.md` unchanged for this step.
 
 Docit does **not** use `.cursor/` or `.mdc` files.
 
@@ -72,7 +106,7 @@ Docit does **not** use `.cursor/` or `.mdc` files.
 
 ### `/docit:doc` — document the session
 
-Same as before: fixed **12-section** template, save under **`.claude/documents/`**, merge **section 11** into **`agents.md`**.
+Fixed **12-section** template, save under **`.claude/documents/`**; **section 11** syncs to **`agents.md`** only for **explicit user rules**, under one **`## Docit`** block.
 
 ```mermaid
 flowchart LR
@@ -114,7 +148,7 @@ Lists every summary file with **date** and **title**—fast overview before **`u
 |---------------|------------|
 | Chat scrolls away | **Named files** under `.claude/documents/` |
 | You forget how a feature was built | **`/docit:up`** reconnects the bug to the **original paths and decisions** |
-| Conventions only in chat | **`agents.md`** carries forward **section 11** guidance |
+| “Don’t touch X” only in chat | **`agents.md` `## Docit`** keeps **explicit user rules** in one place |
 
 ---
 
@@ -151,20 +185,7 @@ Merge **`CLAUDE.md.snippet`** into your project’s **`CLAUDE.md`** for shorthan
 /reload-plugins
 ```
 
-## Install via Claude Code marketplace (this repo)
+## Forks and publishing
 
-This repo includes **`.claude-plugin/marketplace.json`**, so others can add it as a **custom marketplace** (not the same as Anthropic’s built-in catalog—you host the GitHub repo; users point Claude Code at it).
-
-1. **Push** this repo to GitHub (e.g. [yash0208/claude-docit-plugin](https://github.com/yash0208/claude-docit-plugin)).
-2. In **Claude Code**, register the marketplace (exact command may vary by version; see [Create and distribute a plugin marketplace](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces)):
-   - Typically: **`/plugin marketplace add yash0208/claude-docit-plugin`** (or your `owner/repo`).
-3. **Install the plugin** from that marketplace:
-   - **`/plugin install docit@yash-docit`**  
-   - Here **`yash-docit`** is the marketplace **`name`** in `marketplace.json`; **`docit`** is the plugin entry’s **`name`** (must match `.claude-plugin/plugin.json`).
-4. Refresh the catalog later with **`/plugin marketplace update`** when you change the repo.
-
-**Publish to Anthropic’s official marketplace:** that is a **separate** process (submission / review by Anthropic). The file above is for **your own** GitHub-hosted marketplace as described in the docs.
-
-## Distribute your own fork
-
-Clone this repo (or your fork) and follow **Install** above, or use the marketplace steps above with your fork’s `owner/repo`.
+- **Fork:** run **`/plugin marketplace add owner/repo`** for your fork. Install stays **`/plugin install docit@yash-docit`** unless you change the marketplace **`name`** in `.claude-plugin/marketplace.json` (then use `docit@<your-marketplace-name>`).
+- **Anthropic’s official marketplace:** separate process from this GitHub catalog — see [plugin marketplaces](https://docs.anthropic.com/en/docs/claude-code/plugin-marketplaces).

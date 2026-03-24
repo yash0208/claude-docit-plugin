@@ -1,5 +1,5 @@
 ---
-description: Save this session as a Docit summary (.claude/documents/) and append guidance to agents.md. Run /docit:doc after meaningful work.
+description: Save session to .claude/documents/; append only explicit user rules to agents.md under a single ## Docit section. Run /docit:doc after meaningful work.
 ---
 
 # Docit — `/docit:doc` (document session)
@@ -19,14 +19,16 @@ You are in **Claude Code** in the same session as the user. **No separate API ca
    - If that file exists, use ` (2)`, ` (3)`, etc. before `.md`.
    - YAML frontmatter: `date`, `source: claude-code-docit`, `generatedAt` (ISO-8601).
 
-4. **Section 11 — suggested project guidance:** Take the 3–6 rules from that section and **merge them into `agents.md`** at the project root (create the file if it does not exist):
-   - Append a new `##` section at the end: `## Docit — <YYYY-MM-DD> — <short title from Document Title>`.
-   - Under it, a one-line intro: `Guidance captured from this Claude Code session (Docit):`
-   - Then a bullet list: one bullet per rule from section 11 (same wording as in the summary).
-   - If a section with the exact same heading already exists from a prior run, append ` (2)`, ` (3)` to the heading instead of overwriting.
+4. **`agents.md` (only explicit user rules):** Read section 11 of what you are about to write. **Update `agents.md`** at the project root **only if** section 11 contains one or more real instructions (not the placeholder “none” line — see section 11 spec).
+   - Use **exactly one** heading for Docit, always: **`## Docit`** (no dates, no session title in the heading). Never add a new `## Docit — …` heading per run.
+   - If **`## Docit`** already exists, **append new bullets only** under that section (after its existing bullets). Do not rename or duplicate the heading.
+   - If **`## Docit`** does not exist, create it at the **end** of `agents.md` (create the file if needed). Optional one line under the heading: `User explicitly asked these constraints for Claude Code (Docit appends here):`
+   - For each instruction from section 11, add **one** bullet. Prefix with `(<YYYY-MM-DD>) ` for traceability. **Skip** a bullet if the same instruction text is already present under **`## Docit`** (avoid duplicates).
+   - If section 11 says there were no explicit instructions, **do not** open or change `agents.md` for Docit rules (still write the summary file as usual).
+   - Legacy headings like `## Docit — …` from older Docit runs: leave them as-is; add **`## Docit`** at EOF if missing and append only there going forward.
    - Do **not** create or edit `.cursor/` paths or `.mdc` files.
 
-5. **Confirm** the paths you wrote or updated (`agents.md` and the summary under `.claude/documents/`).
+5. **Confirm** the paths you wrote or updated (summary under `.claude/documents/`; note if `agents.md` was unchanged because there were no strict user instructions).
 
 ---
 
@@ -80,9 +82,14 @@ Explicit list. Each bullet: Mistake · Cause · Correction. If none: `None ident
 
 Whether the implementation solves the original problem, limitations, possible improvements. 2–4 sentences.
 
-### 11. Suggested Project Guidance
+### 11. Strict user instructions (agents.md sync)
 
-Rules the **user asked to follow** or that emerged from the session: structure, architecture, patterns, conventions for **future Claude Code work** on this repo. Write 3–6 rules. Each rule = one clear, standalone instruction; keep each to one sentence when possible. These same bullets are **appended to `agents.md`** (see Steps). List them here in the summary as plain numbered or bulleted lines.
+**Purpose:** List **only** things the **user explicitly said** they want enforced—hard constraints or clear “do / don’t” orders. Examples: “Don’t add `secrets/` to PRs”, “Never edit `legacy/foo.js` without asking”, “Always run `pnpm test` before finishing”.
+
+**Do not** include: inferred style preferences, generic best practices, architectural suggestions, or rules Claude inferred unless the **user** stated them as instructions.
+
+- If there are none: write exactly **`None — no explicit user instructions to sync to agents.md.`** (and then **do not** modify `agents.md` for Docit — see Steps).
+- If there are some: use a short bullet list (as many as the user actually gave, not a quota). Wording should match what you will append under **`## Docit`** in `agents.md`.
 
 ### 12. Optional Diagram
 
